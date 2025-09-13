@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { CompetitionCard } from "@/components/CompetitionCard";
-import { Button } from "@/components/ui/button";
+import { GameDetailsModal } from "@/components/GameDetailsModal";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Star, Clock, Users } from "lucide-react";
-import heroImage from "@/assets/competition-hero.jpg";
 
 const Index = () => {
+  const [selectedCompetition, setSelectedCompetition] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewDetails = (competition: any) => {
+    setSelectedCompetition(competition);
+    setIsModalOpen(true);
+  };
+
+  const handleRegister = (competition: any) => {
+    alert(`Registration started for ${competition.title}!`);
+  };
+
   const competitions = [
     {
       title: "Cricket Premier League",
@@ -74,22 +85,12 @@ const Index = () => {
     },
   ];
 
-  const stats = [
-    { icon: Trophy, label: "Total Prize Pool", value: "₹25L+" },
-    { icon: Users, label: "Registered Teams", value: "140+" },
-    { icon: Star, label: "Sports Categories", value: "6" },
-    { icon: Clock, label: "Competition Period", value: "2 Months" },
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-hero">
+          <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/10 to-background/30" />
         </div>
         
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
@@ -97,51 +98,15 @@ const Index = () => {
             🏆 Multi-Sport Championship 2024
           </Badge>
           
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent leading-tight">
-            PLAY
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent leading-tight">
+            SPORTS
             <br />
-            COMPETE
-            <br />
-            WIN
+            CHAMPIONSHIP
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Join India's biggest multi-sport championship featuring Cricket, Kabaddi, Football, 
-            Volleyball and more. Compete with the best athletes across the nation.
+            Join India's biggest multi-sport event
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-lg px-8 py-4"
-            >
-              View Competitions
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-primary/30 hover:bg-primary/10 text-lg px-8 py-4"
-            >
-              Competition Rules
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-secondary/20">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="mx-auto w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
-                  <stat.icon className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">{stat.value}</h3>
-                <p className="text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -159,11 +124,25 @@ const Index = () => {
           
           <div className="grid gap-6 max-w-7xl mx-auto">
             {competitions.map((competition, index) => (
-              <CompetitionCard key={index} {...competition} />
+              <CompetitionCard 
+                key={index} 
+                {...competition} 
+                onViewDetails={() => handleViewDetails(competition)}
+                onRegister={() => handleRegister(competition)}
+              />
             ))}
           </div>
         </div>
       </section>
+
+      {/* Game Details Modal */}
+      {selectedCompetition && (
+        <GameDetailsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          competition={selectedCompetition}
+        />
+      )}
     </div>
   );
 };

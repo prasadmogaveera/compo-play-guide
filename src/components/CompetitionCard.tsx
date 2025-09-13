@@ -1,6 +1,8 @@
-import { Calendar, MapPin, Trophy, Users } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Calendar, MapPin, Trophy, Users, Info, UserPlus } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface CompetitionCardProps {
   title: string;
@@ -12,6 +14,8 @@ interface CompetitionCardProps {
   prize: string;
   participants: number;
   status: "upcoming" | "live" | "ended";
+  onViewDetails: () => void;
+  onRegister: () => void;
 }
 
 export const CompetitionCard = ({
@@ -24,6 +28,8 @@ export const CompetitionCard = ({
   prize,
   participants,
   status,
+  onViewDetails,
+  onRegister,
 }: CompetitionCardProps) => {
   const getStatusColor = () => {
     switch (status) {
@@ -83,6 +89,25 @@ export const CompetitionCard = ({
               <p className="text-sm text-muted-foreground">{participants} registered</p>
             </div>
           </div>
+        </div>
+        
+        {/* Action Buttons */}
+        <div className="flex gap-3 mt-6">
+          <Button 
+            onClick={onRegister}
+            className="flex-1 bg-gradient-primary hover:shadow-glow transition-all duration-300"
+          >
+            <UserPlus className="w-4 h-4 mr-2" />
+            Register Now
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={onViewDetails}
+            className="flex-1 border-primary/30 hover:bg-primary/10"
+          >
+            <Info className="w-4 h-4 mr-2" />
+            View Details
+          </Button>
         </div>
       </CardContent>
     </Card>
