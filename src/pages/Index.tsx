@@ -1,5 +1,4 @@
 import { CompetitionCard } from "@/components/CompetitionCard";
-import { PlayerApplicationForm } from "@/components/PlayerApplicationForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Star, Clock, Users } from "lucide-react";
@@ -8,34 +7,78 @@ import heroImage from "@/assets/competition-hero.jpg";
 const Index = () => {
   const competitions = [
     {
-      title: "Pro League Championship",
-      game: "Counter-Strike 2",
-      date: "March 25, 2024",
-      time: "2:00 PM EST",
-      venue: "Gaming Arena",
-      location: "Los Angeles, CA",
-      prize: "$50,000",
-      participants: 128,
+      title: "Cricket Premier League",
+      game: "Cricket",
+      date: "March 15, 2024",
+      time: "10:00 AM",
+      venue: "Sports Stadium",
+      location: "Mumbai, India",
+      prize: "₹5,00,000",
+      participants: 16,
       status: "upcoming" as const,
     },
     {
-      title: "Battle Royale Masters",
-      game: "Fortnite",
-      date: "April 10, 2024",
-      time: "6:00 PM EST",
-      venue: "Convention Center",
-      location: "Las Vegas, NV",
-      prize: "$25,000",
-      participants: 64,
+      title: "National Kabaddi Championship",
+      game: "Kabaddi",
+      date: "March 22, 2024",
+      time: "3:00 PM",
+      venue: "Indoor Sports Complex",
+      location: "Delhi, India",
+      prize: "₹3,00,000",
+      participants: 12,
+      status: "upcoming" as const,
+    },
+    {
+      title: "Football Premier Cup",
+      game: "Football",
+      date: "April 5, 2024",
+      time: "5:00 PM",
+      venue: "Football Stadium",
+      location: "Kolkata, India",
+      prize: "₹8,00,000",
+      participants: 24,
+      status: "upcoming" as const,
+    },
+    {
+      title: "Volleyball State Championship",
+      game: "Volleyball",
+      date: "April 12, 2024",
+      time: "9:00 AM",
+      venue: "Sports Arena",
+      location: "Chennai, India",
+      prize: "₹2,50,000",
+      participants: 20,
+      status: "upcoming" as const,
+    },
+    {
+      title: "Basketball League Finals",
+      game: "Basketball",
+      date: "April 20, 2024",
+      time: "7:00 PM",
+      venue: "Indoor Court",
+      location: "Bangalore, India",
+      prize: "₹4,00,000",
+      participants: 16,
+      status: "upcoming" as const,
+    },
+    {
+      title: "Table Tennis Open",
+      game: "Table Tennis",
+      date: "April 25, 2024",
+      time: "11:00 AM",
+      venue: "Sports Center",
+      location: "Pune, India",
+      prize: "₹1,50,000",
+      participants: 32,
       status: "upcoming" as const,
     },
   ];
 
   const stats = [
-    { icon: Trophy, label: "Total Prize Pool", value: "$100K+" },
-    { icon: Users, label: "Registered Players", value: "500+" },
-    { icon: Star, label: "Professional Teams", value: "32" },
-    { icon: Clock, label: "Tournament Duration", value: "3 Days" },
+    { icon: Trophy, label: "Total Prize Pool", value: "₹25L+" },
+    { icon: Users, label: "Registered Teams", value: "140+" },
+    { icon: Star, label: "Sports Categories", value: "6" },
+    { icon: Clock, label: "Competition Period", value: "2 Months" },
   ];
 
   return (
@@ -51,20 +94,20 @@ const Index = () => {
         
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
           <Badge className="mb-6 bg-gradient-primary border-primary/20 text-primary-foreground text-lg px-6 py-2">
-            🏆 Ultimate Gaming Championship 2024
+            🏆 Multi-Sport Championship 2024
           </Badge>
           
           <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent leading-tight">
+            PLAY
+            <br />
             COMPETE
             <br />
-            CONQUER
-            <br />
-            CHAMPION
+            WIN
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Join the most prestigious gaming competition of the year. Battle against the best players, 
-            win incredible prizes, and claim your place in gaming history.
+            Join India's biggest multi-sport championship featuring Cricket, Kabaddi, Football, 
+            Volleyball and more. Compete with the best athletes across the nation.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -72,14 +115,14 @@ const Index = () => {
               size="lg" 
               className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-lg px-8 py-4"
             >
-              Register Now
+              View Competitions
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               className="border-primary/30 hover:bg-primary/10 text-lg px-8 py-4"
             >
-              View Schedule
+              Competition Rules
             </Button>
           </div>
         </div>
@@ -107,35 +150,17 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Upcoming Competitions
+              Sports Competitions
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Choose your battleground and register for the competitions that match your expertise.
+              Discover all the exciting sports competitions happening across India.
             </p>
           </div>
           
-          <div className="grid gap-8 max-w-4xl mx-auto">
+          <div className="grid gap-6 max-w-7xl mx-auto">
             {competitions.map((competition, index) => (
               <CompetitionCard key={index} {...competition} />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Registration Section */}
-      <section className="py-20 bg-secondary/10">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Ready to Compete?
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Fill out the registration form below and secure your spot in the competition.
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <PlayerApplicationForm />
           </div>
         </div>
       </section>
