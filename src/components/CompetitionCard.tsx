@@ -1,0 +1,90 @@
+import { Calendar, MapPin, Trophy, Users } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+interface CompetitionCardProps {
+  title: string;
+  game: string;
+  date: string;
+  time: string;
+  venue: string;
+  location: string;
+  prize: string;
+  participants: number;
+  status: "upcoming" | "live" | "ended";
+}
+
+export const CompetitionCard = ({
+  title,
+  game,
+  date,
+  time,
+  venue,
+  location,
+  prize,
+  participants,
+  status,
+}: CompetitionCardProps) => {
+  const getStatusColor = () => {
+    switch (status) {
+      case "upcoming":
+        return "bg-gradient-primary border-primary/20 text-primary-foreground";
+      case "live":
+        return "bg-success border-success/20 text-success-foreground";
+      case "ended":
+        return "bg-muted border-border text-muted-foreground";
+    }
+  };
+
+  return (
+    <Card className="overflow-hidden bg-gradient-card border-border/50 shadow-card hover:shadow-glow transition-all duration-500 group">
+      <CardHeader className="relative">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            {title}
+          </CardTitle>
+          <Badge className={getStatusColor()}>
+            {status.toUpperCase()}
+          </Badge>
+        </div>
+        <p className="text-muted-foreground text-lg">{game}</p>
+      </CardHeader>
+      
+      <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
+            <Calendar className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-semibold">{date}</p>
+              <p className="text-sm text-muted-foreground">{time}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
+            <MapPin className="w-5 h-5 text-accent" />
+            <div>
+              <p className="font-semibold">{venue}</p>
+              <p className="text-sm text-muted-foreground">{location}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
+            <Trophy className="w-5 h-5 text-accent" />
+            <div>
+              <p className="font-semibold">Prize Pool</p>
+              <p className="text-sm text-primary font-bold">{prize}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
+            <Users className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-semibold">Participants</p>
+              <p className="text-sm text-muted-foreground">{participants} registered</p>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
